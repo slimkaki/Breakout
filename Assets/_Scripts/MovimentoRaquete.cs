@@ -31,9 +31,9 @@ public class MovimentoRaquete : MonoBehaviour {
 
         Vector2 posicaoViewport = Camera.main.WorldToViewportPoint(transform.position);
         // Debug.Log($"InputX: {inputX}");
-        if (posicaoViewport.x <= 0 && inputX <= 0) {
+        if (posicaoViewport.x <= 0.05 && inputX <= 0.1) {
             transform.position += new Vector3(0, 0, 0) * Time.deltaTime * velocidade;
-        } else if (posicaoViewport.x >= 1 && inputX >= 1) {
+        } else if (posicaoViewport.x >= 0.95 && inputX >= 0.9) {
             transform.position -= new Vector3(0, 0, 0) * Time.deltaTime * velocidade;
         } else {
             transform.position += new Vector3(inputX, 0, 0) * Time.deltaTime * velocidade;

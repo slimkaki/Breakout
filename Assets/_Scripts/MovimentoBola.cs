@@ -35,22 +35,21 @@ public class MovimentoBola : MonoBehaviour {
 
         transform.position += direcao * Time.deltaTime * velocidade;   
         Vector2 posicaoViewport = Camera.main.WorldToViewportPoint(transform.position);
-        // Debug.Log($"posicao: ({posicaoViewport.x}, {posicaoViewport.x})");
-        // if (posicaoViewport.x <= 0.0f || posicaoViewport.x >= 1.0f) {
+        // // Debug.Log($"posicao: ({posicaoViewport.x}, {posicaoViewport.x})");
+        if (posicaoViewport.x < 0 || posicaoViewport.x > 1) {
         //     // Debug.Log($"posicao: ({posicaoViewport.x}, {posicaoViewport.y})");
             
-        //     direcao = new Vector3(-direcao.x, direcao.y);
-        // }
-        // if (posicaoViewport.y >= 1.0f) {
-        //     // Debug.Log($"posicao: ({posicaoViewport.x}, {posicaoViewport.y})");
-            
-        //     direcao = new Vector3(direcao.x, -direcao.y);
-        // }
-        // if (posicaoViewport.y <= 0.0f) {
+            direcao = new Vector3(-direcao.x, direcao.y);
+        }
+        else if (posicaoViewport.y > 1) {
             // Debug.Log($"posicao: ({posicaoViewport.x}, {posicaoViewport.y})");
-            // PerdeVida();
-        // }
-        // Debug.Log($"Vidas: {gm.vidas} \t | \t Pontos: {gm.pontos}");
+            
+            direcao = new Vector3(direcao.x, -direcao.y);
+        }
+        else if (posicaoViewport.y < 0) {
+            // Debug.Log($"posicao: ({posicaoViewport.x}, {posicaoViewport.y})");
+            PerdeVida();
+        }
     }
 
 
@@ -93,9 +92,16 @@ public class MovimentoBola : MonoBehaviour {
 
             direcao = new Vector3(dirX, dirY).normalized;
 
-        } else if (col.gameObject.CompareTag("Parede")) {
-            Debug.Log("Bati na parede!");
-            direcao = new Vector3(direcao.x, -direcao.y);
+        // } else if (col.gameObject.CompareTag("Parede")) {
+        //     if (direcao.x > 0){
+        //         direcao = new Vector3(-direcao.x, direcao.y);
+        //     }
+        //     if (direcao.y > 0) {
+        //         direcao = new Vector3(direcao.x, -direcao.y);
+        //     }
+        //     if (direcao.x < 0) {
+        //         direcao = new Vector3(direcao.x, -direcao.y);
+        //     }
 
         } else if (col.gameObject.CompareTag("Tijolo")) {
             Transform newExplosion = Instantiate(explosion, transform.position, transform.rotation);
