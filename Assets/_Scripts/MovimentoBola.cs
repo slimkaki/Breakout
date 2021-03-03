@@ -87,10 +87,12 @@ public class MovimentoBola : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player")) {
             // SoundEffectsManager.PlaySound("hit");
-            float dirX = Random.Range(-5.0f, 5.0f); 
+            // float dirX = Random.Range(-5.0f, 5.0f); 
             float dirY = Random.Range(1.0f, 5.0f); 
 
-            direcao = new Vector3(dirX, dirY).normalized;
+            float dirX = transform.position.x - col.transform.position.x;
+
+            direcao = new Vector3(dirX*1.5f, dirY).normalized;
 
         // } else if (col.gameObject.CompareTag("Parede")) {
         //     if (direcao.x > 0){
